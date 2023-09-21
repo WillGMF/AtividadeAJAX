@@ -24,5 +24,13 @@ document.addEventListener('DOMContentLoaded', function(){
             avatar.src = json.avatar_url;
             linkUser.href = json.html_url;
         })
-
+        .catch(function(error) {
+            if(error.message.includes('400')) {
+                messageError.innerText = 'Erro 400: (Requisição inválida)';
+            } else if (error.message.includes('500')) {
+                messageError.innerText = 'Erro 500: (Erro interno do servidor)';
+            } else {
+                messageError.innerText = 'Ocorreu um erro, tente recarregar a página';
+            }
+        });
 })
